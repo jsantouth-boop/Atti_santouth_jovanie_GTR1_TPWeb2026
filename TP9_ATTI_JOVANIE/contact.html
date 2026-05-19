@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Mon-mini-site</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Page de conctact</h1>
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="presentation.html">Presentation</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <section class="carte">
+        <h2>Formulaire d'inscription dynamique</h2>
+        <p>Ce formulaire utilise JavaScript pour verifier dynamique les informations saisies.</p>
+        <form action="">
+            <label for="Nom">Nom  complet :</label>
+            <input id="nom" placeholder="Entrez votre nom complet" oninput="verifierNom()"></input>
+            <p id="erreurNom"></p>
+            <label for="email">Adresse email :</label>
+            <input type="text" id="email" placeholder="Exemple: etudiant@email.com">
+            <p id="erreurEmail"></p>
+            <label for="motDePasse">Mot de Passe :</label>
+            <input type="password" id="motDePasse" placeholder="Entrez un mot de passe">
+            <p id="erreurMotDePasse"></p>
+            <label for="confirmationMotDePasse">Confirmation du mot de passe :</label>
+            <input type="password" id="confirmationMotDePasse" placeholder="Confirmez le mot de passe">
+            <p id="erreurConfirmation"></p>
+            <button onclick="validerFormulaire()">Valider le formulaire</button>
+            <button onclick="reinitialiserFormulaire()">Réinitialiser</button>
+            <p id="messageFinal"></p>
+        </form>
+    </section>
+    </aside>
+    </div>
+    <footer>
+        <p>&copy; 2026 - Mon mini-site</p>
+    </footer>
+    <script>
+        function validerFormulaire() {
+            let nom = document.getElementById("nom").value;
+            let email = document.getElementById("email").value;
+            let motDePasse = document.getElementById("motDePasse").value;
+            let confirmation = document.getElementById("confirmationMotDePasse").value;
+            document.getElementById("erreurNom").textContent = "";
+            document.getElementById("erreurEmail").textContent = "";
+            document.getElementById("erreurMotDePasse").textContent = "";
+            document.getElementById("erreurConfirmation").textContent = "";
+            document.getElementById("messageFinal").textContent = "";
+
+            /* Validation du champ nom */
+
+            if (nom === "") {
+                document.getElementById("erreurNom").textContent = "Le nom est obligatoire.";
+                document.getElementById("nom").style.borderColor = "red";
+            } else {
+                document.getElementById("erreurNom").style.borderColor = "green";
+            }
+            if (email === "") {
+                document.getElementById("erreurEmail").textContent = "L'adresse email est obligatoire.";
+                document.getElementById("email").style.borderColor = "red";
+            } else if (!email.includes("@")) {
+                document.getElementById("erreurEmail").textContent = "L'adresse email est invalide.";
+                document.getElementById("email").style.borderColor = "red";
+            } else {
+                document.getElementById("email").style.borderColor = "green";
+            }
+            if (motDePasse.length < 6) {
+                document.getElementById("erreurMotDePasse").textContent = "Le mot de paase doit contenir au moins 6 caracteres";
+                document.getElementById("motDePasse").style.borderColor = "red";
+            } else {
+                document.getElementById("motDePasse").style.borderColor = "green";
+            }
+            if (confirmation !== motDePasse) {
+                document.getElementById("erreurConfirmation").textContent = "Les mots de passe ne correspondent pas.";
+                document.getElementById("confirmationMotDePasse").style.borderColor = "red";
+            } else {
+                document.getElementById("confirmationMotDePasse").style.borderColor = "green";
+            }
+
+            if (nom !== "" && email.includes("@") && motDePasse.length >= 6 && confirmation === motDePasse) {
+                document.getElementById("messageFinal").textContent = "Le formulaire a été validé avec succes.";
+                document.getElementById("messageFinal").style.color = "green";
+            } else {
+                document.getElementById("messageFinal").textContent = "Le formulaire contient des erreurs.";
+                document.getElementById("messageFinal").style.color = "red";
+            }
+        }
+
+        function reinitialiserFormulaire() {
+            document.getElementById("nom").value = "";
+            document.getElementById("email").value = ""
+            document.getElementById("motDePasse").value = "";
+            document.getElementById("confirmartionMotDePasse").value = "";
+
+            document.getElementById("erreurNom").textContent = "";
+            document.getElementById("erreurEmail").textContent = "";
+            document.getElementById("erreurMotDePasse").textContent = "";
+            document.getElementById("erreurConfirmation").textContent = "";
+            document.getElementById("messageFinal").textContent = "";
+
+            document.getElementById("nom").style.borderColor = "#ccc";
+            document.getElementById("email").style.borderColor = "#ccc";
+            document.getElementById("motDePasse").style.borderColor = "#ccc";
+            document.getElementById("confirmationMotDePasse").style.borderColor = "#ccc";
+
+        }
+
+        function verifierNom() {
+            let nom = document.getElementById("nom").value;
+            if (nom.length < 3) {
+                document.getElementById("erreurNom").textContent = "Le nom est trop court.";
+                document.getElementById("nom").style.borderColor = "red";
+            } else {
+                document.getElementById("erreurNom").textContent = "";
+                document.getElementById("nom").style.borderColor = "green";
+            }
+        }
+    </script>
+</body>
+
+</html>
